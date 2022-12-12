@@ -63,6 +63,7 @@ const testData: Competition[] = [
   ];
 
    
+  
 const CompetitionList = () => {
 
   const sections = testData.reduce((acc, item) => {
