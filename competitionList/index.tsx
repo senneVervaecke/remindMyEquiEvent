@@ -1,9 +1,9 @@
 import moment from "moment";
 import React from "react";
-import { SafeAreaView, SectionList, Text } from "react-native";
+import { List } from "react-native-paper";
 import { Competition } from "../data/competition";
-import CompetitionListItem from "./item";
-import CompetitionListSectionHeader from "./sectionHeader";
+import { CompetitionSection } from "../data/competitionSection";
+import CompetitionListSection from "./section";
 
 const testData: Competition[] = [
     {
@@ -61,31 +61,33 @@ const testData: Competition[] = [
       status: "Upcoming"
     }
   ];
-
-   
-  
+ 
 const CompetitionList = () => {
+
+  const [expanded, setExpanded] = React.useState(true);
+
+  const handlePress = () => setExpanded(!expanded);
+
 
   const sections = testData.reduce((acc, item) => {
     const section = acc.find((s) => s.year === item.endDate.year() && s.week === item.endDate.week());
     if (section) {
-      section.data.push(item);
+      section.addCompetition(item);
     } else {
-      acc.push({year: item.endDate.year(), week: item.endDate.week(), data: [item] });
+      acc.push(new CompetitionSection(item.endDate.year(), item.endDate.week(), [item]));
     }
     return acc;
-  }, [] as {year: number; week: number; data: Competition[] }[]);
+  }, [] as CompetitionSection[]);
+  
+
+
 
 
     return (
-            <SectionList
-                sections={sections }
-                keyExtractor={(item) => item.code}
-                renderItem={({ item }) => <CompetitionListItem name={item.name}></CompetitionListItem>}
-                renderSectionHeader={({ section }) => (
-                    <CompetitionListSectionHeader year={section.year} week={section.week}></CompetitionListSectionHeader>
-                )}
-            />
+      <List.Section>
+        <List.Subheader>Competitions 2022</List.Subheader>
+        {sections.map((section) => <CompetitionListSection section={section}></CompetitionListSection>)}
+    </List.Section>
     );
 };
 

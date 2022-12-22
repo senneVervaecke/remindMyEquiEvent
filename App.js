@@ -1,13 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import CompetitionList from './competitionList';
+import { Provider as PaperProvider } from 'react-native-paper';
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <PaperProvider style={styles.container}>
       <StatusBar style="auto" />
       <CompetitionList></CompetitionList>
-    </View>
+    </PaperProvider>
   );
 }
 
