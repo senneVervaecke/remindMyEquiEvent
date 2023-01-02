@@ -17,4 +17,16 @@ export class CompetitionSection{
     addCompetition(competition: Competition) {
         this.competitions.push(competition);
     }
+
+    static fromCompetitions(competitions: Competition[]): CompetitionSection[] {
+        return competitions.reduce((acc, item) => {
+            const section = acc.find((s) => s.year === item.endDate.year() && s.week === item.endDate.week());
+            if (section) {
+              section.addCompetition(item);
+            } else {
+              acc.push(new CompetitionSection(item.endDate.year(), item.endDate.week(), [item]));
+            }
+            return acc;
+          }, [] as CompetitionSection[]);
+    }
 }

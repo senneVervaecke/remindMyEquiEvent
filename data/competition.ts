@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Reminder } from "./reminder";
 
 export class Competition {
   code: string;
@@ -8,6 +9,7 @@ export class Competition {
   startDate: moment.Moment;
   endDate: moment.Moment;
   closingDate?: moment.Moment;
+  reminders: Reminder[];
     
     constructor(code: string, name: string, discipline: string, status: string, startDate: moment.Moment, endDate: moment.Moment, closingDate?: moment.Moment) {
         this.code = code;
@@ -17,5 +19,6 @@ export class Competition {
         this.startDate = startDate;
         this.endDate = endDate;
         this.closingDate = closingDate;
+        this.reminders = [];
     }
 }

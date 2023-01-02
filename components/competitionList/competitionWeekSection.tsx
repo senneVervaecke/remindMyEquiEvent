@@ -1,14 +1,14 @@
 import moment from "moment";
 import React from "react";
 import { List } from "react-native-paper";
-import { CompetitionSection } from "../data/competitionSection";
-import CompetitionListItem from "./item";
+import { CompetitionSection } from "../../data/competitionSection";
+import CompetitionItem from "./competitionItem";
 
-type CompetitionListSectionProps = {
+type CompetitionWeekSectionProps = {
     section: CompetitionSection;
 };
 
-const CompetitionListSection = (props: CompetitionListSectionProps) => {
+const CompetitionWeekSection = (props: CompetitionWeekSectionProps) => {
     const section = props.section;
     const [expanded, setExpanded] = React.useState(true);
 
@@ -22,10 +22,10 @@ const CompetitionListSection = (props: CompetitionListSectionProps) => {
       expanded={expanded}
       onPress={() => setExpanded(!expanded)}>
         {section.competitions.map((competition) => (
-          <CompetitionListItem key={competition.code} competition={competition} />
+          <CompetitionItem key={competition.code} competition={competition} />
         ))}
       </List.Accordion>
     )
   };
 
-export default CompetitionListSection;
+export default CompetitionWeekSection;

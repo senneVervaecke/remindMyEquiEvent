@@ -1,14 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import CompetitionList from './competitionList';
+import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
-
+import { NavigationContainer } from '@react-navigation/native';
+import CustomNavigator from './components/general/navigator';
 
 export default function App() {
+  
   return (
     <PaperProvider style={styles.container}>
-      <StatusBar style="auto" />
-      <CompetitionList></CompetitionList>
+      <NavigationContainer>
+        <StatusBar style="auto" />
+        <CustomNavigator />
+      </NavigationContainer>
     </PaperProvider>
   );
 }
