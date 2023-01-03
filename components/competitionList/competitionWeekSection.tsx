@@ -1,7 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { List } from "react-native-paper";
-import { CompetitionSection } from "../../data/competitionSection";
+import { CompetitionSection } from "../../data/types";
 import CompetitionItem from "./competitionItem";
 
 type CompetitionWeekSectionProps = {

@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, List } from "react-native-paper";
-import { Competition } from "../../data/competition";
-import uuid from 'react-native-uuid';
+import { Competition } from "../../data/types";
 import ReminderItem from "./reminderItem";
 
 
@@ -17,13 +16,13 @@ const CompetitionItem = (props: CompetitionListItemProps) => {
              left={(props) => <List.Icon {...props} icon="calendar-range" />}
              title={`${competition.startDate.format('DD/MM')} - ${competition.endDate.format('DD/MM/YYYY')}`}
              description={competition.closingDate ? `closing at: ${competition.closingDate.format('DD/MM/YYYY')}` : 'No closing date'}
-             key={uuid.v4() as string}
+             key={competition.code}
              />
             {competition.reminders.map((reminder) => (
                 <ReminderItem
                     reminder={reminder}
                     closingDate={competition.closingDate}
-                    key={uuid.v4() as string}
+                    key={reminder.id}
                 />
             ))}
             <Button onPress={() => console.log('Add reminder pressed')}>Add reminder</Button>

@@ -1,6 +1,6 @@
 import moment from "moment";
-import { Competition } from "../data/competition";
-import { Reminder } from "../data/reminder";
+import { Competition } from "../data/types";
+import uuid from "react-native-uuid"
 
 export class LocalData {
     static getCompetitions(): Competition[] {
@@ -14,8 +14,8 @@ export class LocalData {
               startDate:moment().add(1, 'week').set({day: 3}),
               status: "Canceled",
               reminders: [
-                new Reminder(2, 'days', '16:00'),
-                new Reminder(7, 'days', '9:00')
+                {id: uuid.v4() as string, remindAmount: 1, remindUnit: 'days', remindTime: '08:00', remindedUser: false},
+                {id: uuid.v4() as string, remindAmount: 5, remindUnit: 'days', remindTime: '14:00', remindedUser: false}
               ]
             },
             {
@@ -57,8 +57,8 @@ export class LocalData {
               startDate:moment().add(3, 'week').set({day: 3}),
               status: "Upcoming",
               reminders: [
-                new Reminder(1, 'days', '08:00'),
-                new Reminder(5, 'days', '14:00')
+                {id: uuid.v4() as string, remindAmount: 1, remindUnit: 'days', remindTime: '08:00', remindedUser: false},
+                {id: uuid.v4() as string, remindAmount: 5, remindUnit: 'days', remindTime: '14:00', remindedUser: false}
               ]
             },
             {
