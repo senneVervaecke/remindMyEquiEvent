@@ -18,7 +18,7 @@ const CompetitionWeekSection = (props: CompetitionWeekSectionProps) => {
 
     return (
       <List.Section>
-        <List.Subheader style={styles.title}>{title}</List.Subheader>
+        <List.Subheader style={[styles.title, {backgroundColor: '#D3D3D3'}]}>{title}</List.Subheader>
         {section.competitions.map((competition) => (
           <CompetitionItem key={competition.code} competition={competition} />
         ))}
