@@ -20,7 +20,16 @@ export interface Competition {
 }
 
 export interface CompetitionSection {
-    year: number;
-    week: number;
+    title: string;
     competitions: Competition[];
+}
+
+export interface CompetitionWeekSection extends CompetitionSection {
+  year: number;
+  week: number;
+}
+
+export interface CompetitionMonthSection extends CompetitionSection {
+  year: number;
+  month: number;
 }

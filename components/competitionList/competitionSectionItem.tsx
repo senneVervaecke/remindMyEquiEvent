@@ -9,16 +9,12 @@ type CompetitionWeekSectionProps = {
     section: CompetitionSection;
 };
 
-const CompetitionWeekSection = (props: CompetitionWeekSectionProps) => {
+const CompetitionSectionItem = (props: CompetitionWeekSectionProps) => {
     const section = props.section;
-
-    const weekStartDate = moment().year(section.year).week(section.week).startOf('week');
-    const weekEndDate = moment().year(section.year).week(section.week).endOf('week');
-    const title = `Week ${section.week}\t\t\t${weekStartDate.format('DD/MM')} - ${weekEndDate.format('DD/MM/YYYY')}`;
 
     return (
       <List.Section>
-        <List.Subheader style={[styles.title, {backgroundColor: '#D3D3D3'}]}>{title}</List.Subheader>
+        <List.Subheader style={styles.title}>{section.title}</List.Subheader>
         {section.competitions.map((competition) => (
           <CompetitionItem key={competition.code} competition={competition} />
         ))}
@@ -29,8 +25,9 @@ const CompetitionWeekSection = (props: CompetitionWeekSectionProps) => {
   const styles = StyleSheet.create({
     title: {
       fontWeight: 'bold',
-      fontSize: 16
+      fontSize: 16,
+      backgroundColor: '#F5F5F5'
     }
   });
 
-export default CompetitionWeekSection;
+export default CompetitionSectionItem;

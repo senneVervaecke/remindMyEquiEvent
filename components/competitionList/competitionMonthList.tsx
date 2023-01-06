@@ -1,39 +1,32 @@
-import moment from "moment";
 import React from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { List } from "react-native-paper";
 import { LocalData } from "../../dao/localData";
-import { Competition, CompetitionWeekSection } from "../../data/types";
+import { Competition, CompetitionMonthSection } from "../../data/types";
 import CustomHeader from "../general/header";
 import CompetitionSectionItem from "./competitionSectionItem";
  
-const CompetitionWeekList = () => {
+const CompetitionMonthList = () => {
 
-  function createTitle(endDate: moment.Moment): string {
-    const weekStartDate = endDate.clone().startOf('week');
-    const weekEndDate = endDate.clone().endOf('week');
-    return `Week ${endDate.week()}\t\t\t${weekStartDate.format('DD/MM')} - ${weekEndDate.format('DD/MM/YYYY')}`;
-  }
-
-  function competitionsToWeekSections(competitions: Competition[]): CompetitionWeekSection[] {
+  function competitionsToMonthSections(competitions: Competition[]): CompetitionMonthSection[] {
     return competitions.reduce((acc, item) => {
-        const section = acc.find((s) => s.year === item.endDate.year() && s.week === item.endDate.week());
+        const section = acc.find((s) => s.year === item.startDate.year() && s.month === item.startDate.month());
         if (section) {
           section.competitions.push(item);
         } else {
           acc.push(
-            {year: item.endDate.year(), week: item.endDate.week(), title: createTitle(item.endDate), competitions: [item]}
+            {year: item.startDate.year(), month: item.startDate.month(), title: item.startDate.format('MMMM YYYY'), competitions: [item]}
             );
         }
         return acc;
-      }, [] as CompetitionWeekSection[]);
+      }, [] as CompetitionMonthSection[]);
   }
   
-  const sections = competitionsToWeekSections(LocalData.getCompetitions());
+  const sections = competitionsToMonthSections(LocalData.getCompetitions());
   
     return (
       <View>
-        <CustomHeader title="Competition week list" />
+        <CustomHeader title="Competition month list" />
         <ScrollView>
           <List.Section style={styles.listContainer}>
             {sections.map((section) => 
@@ -54,4 +47,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CompetitionWeekList;
+export default CompetitionMonthList;
